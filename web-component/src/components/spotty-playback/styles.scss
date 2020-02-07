@@ -1,0 +1,42 @@
+.spotty-playback {
+  display: flex;
+  height: 70px;
+  width: fit-content;
+
+  color: white;
+
+  padding: 10px;
+  border-radius: 4px;
+  font-family: 'Helvetica';
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-right: 10px;
+
+    & > .track-wrapper {
+      display: flex;
+    }
+  }
+}
+
+.track-wrapper {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.spotty-suggest-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.track-title {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.album-image {
+  height: 100%;
+}
