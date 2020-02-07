@@ -18,11 +18,9 @@ const spotify = new Spotify({
 export function withRefresh(wrapped) {
   return async function() {
     try {
-      console.log(spotify.getRefreshToken());
       const { body } = await spotify.refreshAccessToken();
       spotify.setAccessToken(body['access_token']);
     } catch (err) {
-      console.log('NOT REFRESHED');
       console.log(err);
     }
 

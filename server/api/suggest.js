@@ -3,6 +3,7 @@ import spotify, { withRefresh } from './_spotify';
 
 const getMyId = async () => {
   const { body } = await spotify.getMe();
+  console.log(await spotify.getUser('gvjacob'));
   return body.id || null;
 };
 
