@@ -47,7 +47,9 @@ const Playback = ({ className, playback }) => {
 
 Playback.getInitialProps = async (ctx) => {
   const { username } = ctx.query;
-  const res = await fetch(`http://localhost:3000/api/playback/${username}`);
+  const res = await fetch(
+    `${process.env.SPOTTY_API_URL}/api/playback/${username}`,
+  );
   const json = await res.json();
 
   return { username, playback: json };

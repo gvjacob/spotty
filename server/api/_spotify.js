@@ -19,7 +19,7 @@ const getSpotify = (tokens = {}) => {
   return new Spotify({
     clientId: SPOTIFY_CLIENT_ID,
     clientSecret: SPOTIFY_CLIENT_SECRET,
-    redirectUri: 'http://www.localhost:8080',
+    redirectUri: process.env.SPOTTY_BASE_URL,
     accessToken,
     refreshToken,
   });

@@ -24,7 +24,7 @@ const Login = ({ className, authorizeUrl }) => {
   const submit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:3000/api/register', {
+    fetch(`${process.env.SPOTTY_API_URL}/api/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const Login = ({ className, authorizeUrl }) => {
 };
 
 Login.getInitialProps = async (context) => {
-  const res = await fetch('http://localhost:3000/api/authorize');
+  const res = await fetch(`${process.env.SPOTTY_API_URL}/api/authorize`);
   const { authorizeUrl } = await res.json();
 
   return { authorizeUrl };

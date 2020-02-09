@@ -1,10 +1,10 @@
 {
-  "name": "spotify-suggest",
+  "name": "spotty-server",
   "version": 2,
   "env": {
     "SPOTIFY_CLIENT_ID": "@spotify-client-id",
     "SPOTIFY_CLIENT_SECRET": "@spotify-client-secret",
-    "SPOTIFY_ACCESS_TOKEN": "@spotify-access-token",
-    "SPOTIFY_REFRESH_TOKEN": "@spotify-refresh-token"
+    "MONGO_DB_CONN_STRING": "@mongo-db-conn-string",
+    "MONGO_DB_NAME": "@mongo-db-name"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "name": "spotty-client",
+  "version": 2,
+  "env": {
+    "SPOTTY_BASE_URL": "@spotty-base-url",
+    "SPOTTY_API_URL": "@spotty-api-url"
+  }
+}
+

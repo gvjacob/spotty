@@ -15,7 +15,7 @@ const Suggest = ({ className, username }) => {
     e.preventDefault();
 
     fetch(
-      `http://localhost:3000/api/search?username=${username}${
+      `${process.env.SPOTTY_API_URL}/api/search?username=${username}${
         title ? `&track=${title}` : ''
       }${artist ? `&artist=${artist}` : ''}`,
     )
@@ -24,7 +24,7 @@ const Suggest = ({ className, username }) => {
   };
 
   const onClick = async (id) => {
-    fetch(`http://localhost:3000/api/suggest`, {
+    fetch(`${process.env.SPOTTY_API_URL}/api/suggest`, {
       method: 'POST',
       body: JSON.stringify({ username, trackId: id }),
     })
