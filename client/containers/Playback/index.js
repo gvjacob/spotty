@@ -12,7 +12,7 @@ const Playback = ({ className, playback }) => {
     query: { username },
   } = useRouter();
 
-  const [suggestMode, setSuggestMode] = useState(true);
+  const [suggestMode, setSuggestMode] = useState(false);
 
   const cssSuggestMode = { [styles.suggestMode]: suggestMode };
 
@@ -63,8 +63,8 @@ const CircularButton = ({ className, onClick, suggestMode }) => {
           </Fragment>
         ) : (
           <Fragment>
-            <span>Got</span>
-            <span>Tunes?</span>
+            <span>Got a</span>
+            <span>Tune?</span>
           </Fragment>
         )}
       </button>

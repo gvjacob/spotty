@@ -43,7 +43,7 @@ const Suggest = ({ className, username }) => {
       })}
     >
       <p className={styles.info}>
-        Got tunes to recommend to{' '}
+        Got a tune to recommend to{' '}
         <span className={styles.username}>{username}</span>?
       </p>
       <div>
