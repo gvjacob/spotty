@@ -2,6 +2,7 @@
   "name": "spotty-server",
   "version": 2,
   "env": {
+    "SPOTTY_BASE_URL": "@spotty-base-url",
     "SPOTIFY_CLIENT_ID": "@spotify-client-id",
     "SPOTIFY_CLIENT_SECRET": "@spotify-client-secret",
     "MONGO_DB_CONN_STRING": "@mongo-db-conn-string",

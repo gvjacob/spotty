@@ -34,7 +34,11 @@ const suggest = async (req, res) => {
   const spotify = await getSpotifyClient(username);
   const playlist = await getUserPlaylist(username);
   const spotifyPlaylist = await createUserPlaylist(spotify, username, playlist);
-  await addTrackToPlaylist(spotify, trackId, spotifyPlaylist);
+  await addTrackToPlaylist(
+    spotify,
+    trackId,
+    spotifyPlaylist.body || spotifyPlaylist,
+  );
 
   res.status(200).end();
 };
