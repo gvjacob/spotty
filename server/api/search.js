@@ -12,7 +12,7 @@ const search = async (req, res) => {
   }
 
   const query = createSearchQuery(reqQuery);
-  const { body } = await spotify.searchTracks(query);
+  const { body } = await spotify.searchTracks(query, { limit: 10 });
   const tracks = get(body, ['tracks', 'items']);
   const tracksData = tracks ? tracks.map(getTrackData) : [];
 

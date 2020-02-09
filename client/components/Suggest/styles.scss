@@ -1,14 +1,44 @@
 .suggest {
-  height: 100vh;
-  width: 100vh;
+  overflow-y: auto;
+  height: calc(100vh - 40px - 50px);
+  width: 100vw;
   background-color: white;
+  padding: 60px;
+  box-sizing: border-box;
+  display:flex;
+
+  &.noTracks {
+    overflow-y: hidden;
+  }
 }
 
 .info {
-  width: 50%;
+  width: 20%;
+  margin-right: 40px;
   font-size: 24px;
 }
 
 .username {
   font-weight: bold;
+}
+
+.form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+  outline: none;
+  font-size: 72px;
+  font-weight: bold;
+  border: none;
+  color: #F7174F;
+}
+
+.by {
+  font-size: 72px;
+  font-weight: bold;
+  margin-right: 20px;
 }

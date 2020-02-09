@@ -12,7 +12,7 @@ const Playback = ({ className, playback }) => {
     query: { username },
   } = useRouter();
 
-  const [suggestMode, setSuggestMode] = useState(false);
+  const [suggestMode, setSuggestMode] = useState(true);
 
   const cssSuggestMode = { [styles.suggestMode]: suggestMode };
 
@@ -30,11 +30,13 @@ const Playback = ({ className, playback }) => {
         <h1>{playback.name}</h1>
         <h2 className={styles.artist}>{playback.artist}</h2>
       </div>
-      <div className={styles.spo}>
-        <span>{`${username}'s`}</span>
-        <h1>SPO</h1>
+      <div className={cn(styles.spottyGraphic, cssSuggestMode)}>
+        <div className={styles.spo}>
+          <span>{`${username}'s`}</span>
+          <h1>SPO</h1>
+        </div>
+        <h1 className={styles.tty}>TTY</h1>
       </div>
-      <h1 className={styles.tty}>TTY</h1>
       <CircularButton
         onClick={() => setSuggestMode(!suggestMode)}
         suggestMode={suggestMode}
@@ -53,7 +55,7 @@ Playback.getInitialProps = async (ctx) => {
 
 const CircularButton = ({ className, onClick, suggestMode }) => {
   return (
-    <aside className={cn(styles.circularButton, className)}>
+    <aside className={cn(styles.circularButton, className)} onClick={onClick}>
       <button onClick={onClick}>
         {suggestMode ? (
           <Fragment>
@@ -61,8 +63,8 @@ const CircularButton = ({ className, onClick, suggestMode }) => {
           </Fragment>
         ) : (
           <Fragment>
-            <span>Got a</span>
-            <span>Tune?</span>
+            <span>Got</span>
+            <span>Tunes?</span>
           </Fragment>
         )}
       </button>

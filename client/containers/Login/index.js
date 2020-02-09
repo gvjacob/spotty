@@ -16,7 +16,7 @@ const Login = ({ className, authorizeUrl }) => {
 
   const images = [
     'https://f4.bcbits.com/img/a0869185133_10.jpg',
-    'https://f4.bcbits.com/img/a2234708408_10.jpg',
+    'https://i.scdn.co/image/ab67616d0000b2732aebf42d8901fbcd14c9eca8',
   ];
 
   const dashify = (string) => string.replace(' ', '-');

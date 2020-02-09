@@ -18,7 +18,7 @@ flex-direction: column;
 }
 
 .register {
-  width: 65%;
+  width: fit-content;
   overflow-x: scroll;
   @include section;
   display: flex;
@@ -67,6 +67,9 @@ flex-direction: column;
   color: $color;
   padding: 15px;
   background-color: $inverse;
+
+  text-transform: uppercase;
+  letter-spacing: 2px;
 
   transition: all 0.2s ease-in-out;
 

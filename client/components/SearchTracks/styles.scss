@@ -1,0 +1,61 @@
+.searchTracks {
+  margin-bottom: 40px;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  animation: fadeIn 0.2s ease-in-out;
+
+  &:hover {
+    > div {
+      > h3 {
+        color: #F7174F;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}
+
+.image {
+  width: 100px;
+}
+
+.track {
+  padding: 20px;
+
+  > h3 {
+    transition: color 0.2s ease-in-out;
+  }
+}
+
+.artist {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.noTracks {
+  position: absolute;
+  bottom: -130px;
+  left: calc(100vh - 40px);
+  display: flex;
+  align-items: center;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.cat {
+  transform-origin: 50% 50%;
+  transform: rotate(20deg);
+  margin-left: 40px;
+}
