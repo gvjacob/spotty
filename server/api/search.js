@@ -1,10 +1,11 @@
-import { get, isEmpty } from 'lodash';
+import { get, isEmpty, omit } from 'lodash';
 
-import spotify, { withRefresh } from './_spotify';
+import { getSpotifyClient } from './_spotify';
 import { createSearchQuery, getTrackData } from './_utils';
 
-const search = withRefresh(async (req, res) => {
-  const reqQuery = req.query;
+const search = async (req, res) => {
+  const reqQuery = omit(req.query, 'username');
+  const spotify = await getSpotifyClient(req.query.username);
 
   if (isEmpty(reqQuery)) {
     return res.send([]);
@@ -16,6 +17,6 @@ const search = withRefresh(async (req, res) => {
   const tracksData = tracks ? tracks.map(getTrackData) : [];
 
   res.send(tracksData);
-});
+};
 
 export default search;

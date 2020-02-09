@@ -1,18 +1,41 @@
-import { get } from 'lodash';
-import spotify, { withRefresh } from './_spotify';
+import { get, find } from 'lodash';
+import { getSpotifyClient } from './_spotify';
+import { getUserPlaylist } from '../mongo/users';
 
-const getMyId = async () => {
-  const { body } = await spotify.getMe();
-  console.log(await spotify.getUser('gvjacob'));
-  return body.id || null;
+const findPlaylist = (playlistName, playlists) => {
+  return find(playlists, ({ name }) => name === playlistName) || null;
+};
+
+const createUserPlaylist = async (spotify, username, playlist) => {
+  const {
+    body: { id },
+  } = await spotify.getMe();
+
+  const {
+    body: { items: playlists },
+  } = await spotify.getUserPlaylists(id);
+
+  const spotifyPlaylist = findPlaylist(playlist, playlists);
+
+  if (!spotifyPlaylist) {
+    return await spotify.createPlaylist(id, playlist);
+  }
+
+  return spotifyPlaylist;
+};
+
+const addTrackToPlaylist = async (spotify, track, playlist) => {
+  const spotifyTrack = await spotify.getTrack(track);
+  await spotify.addTracksToPlaylist(playlist.id, [spotifyTrack.body.uri]);
 };
 
 const suggest = async (req, res) => {
-  const track = get(req.query, 'track');
-  const playlist = get(req.query, 'playlist');
-  const userId = await getMyId();
+  const { username, trackId } = JSON.parse(req.body);
+  const spotify = await getSpotifyClient(username);
+  const playlist = await getUserPlaylist(username);
+  const spotifyPlaylist = await createUserPlaylist(spotify, username, playlist);
+  await addTrackToPlaylist(spotify, trackId, spotifyPlaylist);
 
-  await spotify.createPlaylist(userId, 'Spotify Suggest');
   res.status(200).end();
 };
 

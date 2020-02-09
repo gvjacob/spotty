@@ -1,7 +1,7 @@
 import { isEmpty, get } from 'lodash';
 
-import spotify, { withRefresh } from './_spotify';
-import { getTrackData } from './_utils';
+import { getSpotifyClient } from '../_spotify';
+import { getTrackData } from '../_utils';
 
 const DEFAULT_TRACK = {
   name: "California Dreamin'",
@@ -10,7 +10,7 @@ const DEFAULT_TRACK = {
   isPlaying: false,
 };
 
-const getRecentlyPlayed = async () => {
+const getRecentlyPlayed = async (spotify) => {
   const { body } = await spotify.getMyRecentlyPlayedTracks({
     type: 'track',
     limit: 1,
@@ -20,19 +20,22 @@ const getRecentlyPlayed = async () => {
   return recentlyPlayed ? getTrackData(recentlyPlayed, false) : DEFAULT_TRACK;
 };
 
-const getPlayback = withRefresh(async (req, res) => {
+const getPlayback = async (req, res) => {
+  const username = get(req, ['query', 'username']);
+  const spotify = await getSpotifyClient(username);
+
   try {
     const { body } = await spotify.getMyCurrentPlayingTrack();
 
     if (isEmpty(body)) {
-      res.send(await getRecentlyPlayed());
+      res.send(await getRecentlyPlayed(spotify));
     } else {
       const trackData = getTrackData(body.item, true);
       res.send(trackData);
     }
   } catch {
-    res.send(await getRecentlyPlayed());
+    res.send(await getRecentlyPlayed(spotify));
   }
-});
+};
 
 export default getPlayback;

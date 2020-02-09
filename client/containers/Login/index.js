@@ -8,29 +8,32 @@ import styles from './styles.scss';
 const Login = ({ className, authorizeUrl }) => {
   const {
     query: { code },
+    push,
   } = useRouter();
 
   const [username, setUsername] = useState('');
+  const [playlist, setPlaylist] = useState('');
 
   const images = [
     'https://f4.bcbits.com/img/a0869185133_10.jpg',
     'https://f4.bcbits.com/img/a2234708408_10.jpg',
   ];
 
-  const getInputWidth = () => {
-    const length = username.length;
-    const defaultWidth = 130;
-    const increment = 15;
-
-    if (length <= 3) {
-      return defaultWidth;
-    } else {
-      return defaultWidth - 3 * increment + length * increment;
-    }
-  };
+  const dashify = (string) => string.replace(' ', '-');
 
   const submit = (e) => {
     e.preventDefault();
+
+    fetch('http://localhost:3000/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, playlist, code }),
+      mode: 'no-cors',
+    })
+      .then(() => push(`/playback/${username}`))
+      .catch(console.log);
   };
 
   return (
@@ -44,12 +47,26 @@ const Login = ({ className, authorizeUrl }) => {
           <h1>Hello,</h1>
           <input
             className={styles.input}
+            name={'username'}
             type={'text'}
             placeholder={'you ;)'}
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={{ width: getInputWidth() }}
+            onChange={(e) => setUsername(dashify(e.target.value))}
+            style={{ width: 130 }}
           />
+          <h1>. Drop tunes in </h1>
+          <input
+            className={styles.input}
+            name={'playlist'}
+            type={'text'}
+            placeholder={'this playlist'}
+            value={playlist}
+            onChange={(e) => setPlaylist(e.target.value)}
+            style={{ width: 250 }}
+          />
+          <button style={{ display: 'none' }} type={'submit'}>
+            Submit
+          </button>
         </form>
       ) : (
         <section className={styles.hero}>

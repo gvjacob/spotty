@@ -1,0 +1,203 @@
+.playback {
+  position: relative;
+  display: flex;
+}
+
+.suggest {
+  position: absolute;
+  left: 0;
+  top: 100vh;
+  opacity: 0;
+  transition: all 0.6s ease-in-out;
+  z-index: 99;
+
+  &.suggestMode {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.image {
+  height: 100vh;
+  animation: fadeTopDown 0.6s ease-in-out;
+  z-index: 10;
+}
+
+@mixin cool-text {
+  font-size: 160px;
+  color: #F7174F;
+}
+
+
+.spo {
+  position: absolute;
+  right: -50px;
+  bottom: 50%;
+  //transform: translateY(-50%);
+  animation: fadeInToLeft 0.6s ease-in-out;
+
+  > h1 {
+    @include cool-text;
+    margin-top: -20px;
+  }
+
+  > span {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+}
+
+
+.tty {
+  position: absolute;
+  @include cool-text;
+  left: calc(100vh - 10px);
+  //left: -10px;
+  top: 40%;
+  letter-spacing: 10px;
+  //transform: translateY(50%);
+  animation: fadeInToRight 0.6s ease-in-out;
+}
+
+@keyframes fadeInToRight {
+  from {
+    opacity: 0;
+    transform: translateX(-100%)
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInToLeft {
+  from {
+    opacity: 0;
+    transform: translateX(100%)
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.spottyUser {
+  margin: auto;
+
+  > h1 {
+    font-size: 72px;
+    margin-top: -20px;
+    color: #F7174F;
+  }
+}
+
+.playbackCard {
+  z-index: 12;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 30px 40px;
+  width: 60%;
+  background-color: white;
+
+  transition: all 0.6s ease-in-out;
+
+  &.suggestMode {
+    right: -100%;
+    opacity: 0;
+  }
+
+  animation: fadeRightLeft 0.6s ease-in-out;
+}
+
+@keyframes fadeTopDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100vh);
+  } to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeRightLeft {
+  from {
+    opacity: 0;
+    transform: translateX(60%);
+  } to {
+    opacity: 1;
+  }
+}
+
+.artist {
+  margin-top: 10px;
+  color: #F7174F;
+}
+
+.playbackStatus {
+  color: gray;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.circularButton {
+  cursor: pointer;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  background-color: #F7174F;
+  position: absolute;
+  z-index: 99;
+  left: 100vh;
+  top: 40px;
+  transform: translateX(-50%) rotate(-10deg);
+  transform-origin: 50% 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > button {
+    display: flex;
+    flex-direction: column;
+    background: none;
+    font-family: 'Vinyl';
+    font-style: italic;
+    color: white;
+    font-size: 24px;
+    border: none;
+    line-height: 25px;
+    text-transform: uppercase;
+
+    > div {
+      margin-left: -5px;
+      margin-top: 2px;
+    }
+
+
+    > span:first-child {
+      margin-left: -5px;
+      margin-top: 5px;
+    }
+
+    > span:last-child {
+      margin-right: -5px;
+    }
+  }
+
+
+  animation: fadeIn 0.6s ease-in-out;
+
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    transform: translateX(-50%) rotate(-10deg) scale(1.1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity:0;
+  } to {
+    opacity: 1;
+  }
+}

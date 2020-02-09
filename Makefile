@@ -12,6 +12,10 @@ restart:
 	@make stop
 	@make start
 
+remove:
+	@make stop
+	docker-compose rm -rf
+
 ls:
 	@docker ps -a
 

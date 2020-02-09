@@ -1,9 +1,10 @@
+import spotify from './_spotify';
 import { get, find } from 'lodash';
 
-const IMAGE_SIZE = 300;
+const IMAGE_SIZE = 600;
 
 const isSizeCorrect = (size) => {
-  return size === IMAGE_SIZE;
+  return size > IMAGE_SIZE;
 };
 
 const getCorrectImage = (images) => {
@@ -25,4 +26,13 @@ export const createSearchQuery = (query) => {
   return Object.entries(query).reduce((acc, [key, value]) => {
     return acc + ` ${key}:${value}`;
   }, '');
+};
+
+export const getTokens = async (code) => {
+  const { body } = await spotify.authorizationCodeGrant(code);
+
+  return {
+    accessToken: body['access_token'],
+    refreshToken: body['refresh_token'],
+  };
 };

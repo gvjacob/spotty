@@ -1,31 +1,35 @@
-import { find, get } from 'lodash';
-import Spotify from 'spotify-web-api-node';
+const Spotify = require('spotify-web-api-node');
+const { getUserTokens } = require('../mongo/users');
 
-const {
-  SPOTIFY_CLIENT_ID,
-  SPOTIFY_CLIENT_SECRET,
-  SPOTIFY_ACCESS_TOKEN,
-  SPOTIFY_REFRESH_TOKEN,
-} = process.env;
+const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env;
 
-const spotify = new Spotify({
-  clientId: SPOTIFY_CLIENT_ID,
-  clientSecret: SPOTIFY_CLIENT_SECRET,
-  accessToken: SPOTIFY_ACCESS_TOKEN,
-  refreshToken: SPOTIFY_REFRESH_TOKEN,
-});
+const refresh = async (client) => {
+  try {
+    const { body } = await client.refreshAccessToken();
+    client.setAccessToken(body['access_token']);
+    return client;
+  } catch (err) {
+    return null;
+  }
+};
 
-export function withRefresh(wrapped) {
-  return async function() {
-    try {
-      const { body } = await spotify.refreshAccessToken();
-      spotify.setAccessToken(body['access_token']);
-    } catch (err) {
-      console.log(err);
-    }
+const getSpotify = (tokens = {}) => {
+  const { accessToken, refreshToken } = tokens;
 
-    const result = wrapped.apply(this, arguments);
-  };
-}
+  return new Spotify({
+    clientId: SPOTIFY_CLIENT_ID,
+    clientSecret: SPOTIFY_CLIENT_SECRET,
+    redirectUri: 'http://www.localhost:8080',
+    accessToken,
+    refreshToken,
+  });
+};
 
-export default spotify;
+export const getSpotifyClient = async (username) => {
+  const tokens = await getUserTokens(username);
+  const spotify = getSpotify(tokens);
+
+  return await refresh(spotify);
+};
+
+export default getSpotify();
