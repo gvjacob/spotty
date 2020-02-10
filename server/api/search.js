@@ -6,6 +6,7 @@ import { createSearchQuery, getTrackData } from './_utils';
 const search = async (req, res) => {
   const reqQuery = omit(req.query, 'username');
   const spotify = await getSpotifyClient(req.query.username);
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (isEmpty(reqQuery)) {
     return res.send([]);

@@ -27,6 +27,7 @@ const Suggest = ({ className, username }) => {
     fetch(`${process.env.SPOTTY_API_URL}/api/suggest`, {
       method: 'POST',
       body: JSON.stringify({ username, trackId: id }),
+      mode: 'no-cors',
     })
       .then(() => {
         setTitle('');
