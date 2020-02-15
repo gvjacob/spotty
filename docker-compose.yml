@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  client:
+    build: ./client
+    container_name: spotty-client
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./client:/usr/spotty/client
+    depends_on:
+      - mongo
+
   mongo:
     image: mongo:latest
     container_name: spotty-mongo
