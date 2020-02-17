@@ -8,9 +8,21 @@ services:
       - '8080:8080'
     volumes:
       - ./client:/usr/spotty/client
-    environment:
-      - SPOTTY_API_URL=http://localhost:3000
-      - SPOTTY_BASE_URL=http://localhost:8080
+    env_file:
+      - .env.docker
+    depends_on:
+      - server
+
+  server:
+    build: ./server
+    container_name: spotty-server
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./server:/usr/spotty/server
+      - ./.env.docker:/usr/spotty/server/.env
+    env_file:
+      - .env.docker
     depends_on:
       - mongo
 

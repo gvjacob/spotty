@@ -2,6 +2,7 @@ import { get } from 'lodash';
 import { register } from '../mongo/users';
 
 export default async (req, res) => {
+  console.log('HERE');
   const body = JSON.parse(req.body);
   const { username, playlist, code } = body;
 

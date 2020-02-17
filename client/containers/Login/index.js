@@ -81,7 +81,8 @@ const Login = ({ className, authorizeUrl }) => {
 };
 
 Login.getInitialProps = async (context) => {
-  const res = await fetch(`${process.env.SPOTTY_API_URL}/api/authorize`);
+  const url = `${process.env.SPOTTY_API_URL}/api/authorize`;
+  const res = await fetch(url);
   const { authorizeUrl } = await res.json();
 
   return { authorizeUrl };

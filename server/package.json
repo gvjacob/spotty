@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "now dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "now -t $NOW_TOKEN dev"
   },
   "repository": {
     "type": "git",
