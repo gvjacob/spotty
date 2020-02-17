@@ -3,6 +3,8 @@ import cn from 'classnames';
 import { useRouter } from 'next/router';
 import fetch from 'isomorphic-unfetch';
 import Hero from '../../components/Hero';
+import { AUTHORIZE_API, REGISTER_API } from '../../constants/api';
+
 import styles from './styles.scss';
 
 const Login = ({ className, authorizeUrl }) => {
@@ -24,7 +26,7 @@ const Login = ({ className, authorizeUrl }) => {
   const submit = (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.SPOTTY_API_URL}/api/register`, {
+    fetch(REGISTER_API, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,8 +83,7 @@ const Login = ({ className, authorizeUrl }) => {
 };
 
 Login.getInitialProps = async (context) => {
-  const url = `${process.env.SPOTTY_API_URL}/api/authorize`;
-  const res = await fetch(url);
+  const res = await fetch(AUTHORIZE_API);
   const { authorizeUrl } = await res.json();
 
   return { authorizeUrl };

@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash';
 import cn from 'classnames';
 import fetch from 'isomorphic-unfetch';
 import { useRouter } from 'next/router';
+import { PLAYBACK_API } from '../../constants/api';
 
 import Suggest from '../../components/Suggest';
 import styles from './styles.scss';
@@ -47,9 +48,7 @@ const Playback = ({ className, playback }) => {
 
 Playback.getInitialProps = async (ctx) => {
   const { username } = ctx.query;
-  const res = await fetch(
-    `${process.env.SPOTTY_API_URL}/api/playback/${username}`,
-  );
+  const res = await fetch(`${PLAYBACK_API}/${username}`);
   const json = await res.json();
 
   return { username, playback: json };
